@@ -20,10 +20,11 @@ public partial class Circle : Polygon2D
 		set {
 			_radius = value;
 			Redraw();
+			ResizeTexture();
 		}
 	}
 
-	private float _radius = 100;
+	private float _radius = 10;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -50,5 +51,14 @@ public partial class Circle : Polygon2D
 			polygon[i] = location;
 		}
 		this.Polygon = polygon;
+	}
+
+	private void ResizeTexture() 
+	{
+		if (Texture is not null)
+		{
+			this.TextureScale = Texture.GetSize() / (Radius * 2);
+			this.TextureOffset = new Vector2(Radius, Radius);
+		}
 	}
 }
